@@ -99,10 +99,10 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center">
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-10 py-7">
+      <nav className="absolute top-0 left-0 right-0 flex items-center justify-between px-10 py-7">
         <span className="text-sm tracking-tight text-neutral-900 font-medium">hot take</span>
         <div className="flex items-center gap-8">
           {/* Mobile memory trigger */}
@@ -117,7 +117,7 @@ export default function App() {
       </nav>
 
       {/* Main */}
-      <main className="px-10 pt-4 pb-40 max-w-6xl mx-auto">
+      <main className="px-10 pb-40 max-w-6xl w-full">
         <div className="flex gap-20">
 
           {/* Left — conversation */}
