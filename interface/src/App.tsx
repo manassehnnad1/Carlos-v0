@@ -98,13 +98,24 @@ export default function App() {
     }
   }
 
+  const resizeTextarea = (el?: HTMLTextAreaElement | null) => {
+    if (!el) return
+    el.style.height = "auto"
+    el.style.height = `${el.scrollHeight}px`
+  }
+
+  // keep textarea height in sync with content
+  useEffect(() => {
+    resizeTextarea(inputRef.current)
+  }, [input])
+
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center">
 
       {/* Navbar: evenly spaced left / center / right */}
-      <nav className="absolute top-0 left-0 right-0 grid grid-cols-3 items-center py-7">
-        <div className="flex items-center justify-start pl-10">
-          <img src="./h2.png" alt="logo" className="w-32 h-16" />
+      <nav className="absolute top-0 left-10 right-0 grid grid-cols-3 items-center py-7">
+        <div className="flex items-center justify-start left-10">
+          <img src="./h1.png" alt="logo" className="w-12 h-12" />
         </div>
 
         <div className="flex items-center justify-center">
@@ -166,27 +177,32 @@ export default function App() {
               <div ref={bottomRef} />
             </div>
 
-            {/* Input — anchored to left column */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-100 px-10 py-5">
-              <div className="max-w-6xl flex items-end gap-6">
-                <div className="flex-1">
-                  <textarea
-                    ref={inputRef}
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="drop a take."
-                    rows={1}
-                    className="w-full resize-none bg-transparent text-base text-neutral-900 placeholder:text-neutral-300 focus:outline-none leading-relaxed max-h-32 overflow-y-auto"
-                  />
+            {/* Input — centered, rounded around content, and autosizing */}
+            <div className="fixed bottom-12 left-0 right-0 flex justify-center">
+              <div className="relative mx-auto w-full max-w-[760px]">
+                <div className="absolute inset-0 bg-white/60 backdrop-blur-md rounded-half -z-10" />
+                <div className="flex items-center gap-3 w-full">
+                  <div className="flex-1 inline-flex items-center px-6 py-3 rounded-xl border border-black">
+                    <span className="text-white text-xl pb-1 shrink-0"> /
+                    </span>
+                    <textarea
+                      ref={inputRef}
+                      value={input}
+                      onChange={(e) => { setInput(e.target.value); resizeTextarea(e.target) }}
+                      onKeyDown={handleKeyDown}
+                      placeholder="type here"
+                      rows={3}
+                      className="w-full min-w-[360px] max-w-full h-auto resize-none bg-transparent text-base text-neutral-900 placeholder:text-neutral-400 focus:outline-none leading-relaxed overflow-y-auto"
+                    />
+                  </div>
+                  <button
+                    onClick={handleSend}
+                    disabled={!input.trim() || isTyping}
+                    className="w-10 h-10 rounded-xl cursor-pointer bg-neutral-900 text-white flex items-center justify-center hover:bg-neutral-700 disabled:opacity-40 transition-colors shrink-0"
+                  >
+                    <img src="./send.svg" alt="" className="h-5" />
+                  </button>
                 </div>
-                <button
-                  onClick={handleSend}
-                  disabled={!input.trim() || isTyping}
-                  className="text-sm text-neutral-400 hover:text-neutral-900 disabled:opacity-20 transition-colors pb-0.5 shrink-0"
-                >
-                  send
-                </button>
               </div>
             </div>
           </div>
