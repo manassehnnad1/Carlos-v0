@@ -101,18 +101,24 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center">
 
-      {/* Navbar */}
-      <nav className="absolute top-0 left-0 right-0 flex items-center justify-between px-10 py-7">
-        <span className="text-sm tracking-tight text-neutral-900 font-medium">hot take</span>
-        <div className="flex items-center gap-8">
-          {/* Mobile memory trigger */}
+      {/* Navbar: evenly spaced left / center / right */}
+      <nav className="absolute top-0 left-0 right-0 grid grid-cols-3 items-center py-7">
+        <div className="flex items-center justify-start pl-10">
+          <img src="./h2.png" alt="logo" className="w-32 h-16" />
+        </div>
+
+        <div className="flex items-center justify-center">
+          <span className="text-sm tracking-tight text-neutral-900 font-medium">your FIFA world cup pundit buddy.</span>
+        </div>
+
+        <div className="absolute right-10 flex items-center justify-end gap-4 pr-10">
+          <img src="./h4.png" alt="logo" className="w-9 h-18" />
           <button
             onClick={() => setDrawerOpen(true)}
             className="md:hidden text-sm text-neutral-400 hover:text-neutral-700 transition-colors"
           >
             memory
           </button>
-          
         </div>
       </nav>
 
@@ -129,8 +135,8 @@ export default function App() {
                   className={`flex flex-col gap-0.5 ${msg.role === "user" ? "pl-12" : ""}`}
                 >
                   {msg.role === "assistant" && (
-                    <span className="text-xs text-neutral-400 tracking-widest uppercase mb-1">
-                      analyst
+                    <span className="text-xs text-neutral-400 tracking-widest mb-1">
+                      agent
                     </span>
                   )}
                   <p
@@ -148,7 +154,7 @@ export default function App() {
               {/* Typing indicator */}
               {isTyping && (
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-xs text-neutral-400 tracking-widest uppercase mb-1">analyst</span>
+                  <span className="text-xs text-neutral-400 tracking-widest mb-1">agent</span>
                   <div className="flex items-center gap-1 h-6">
                     <span className="w-1 h-1 bg-neutral-400 rounded-full animate-bounce [animation-delay:0ms]" />
                     <span className="w-1 h-1 bg-neutral-400 rounded-full animate-bounce [animation-delay:120ms]" />
