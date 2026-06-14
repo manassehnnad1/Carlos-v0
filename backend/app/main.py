@@ -34,4 +34,41 @@ class ChatResponse(BaseModel):
 
 class MemoriesResponse(BaseModel):
     memories: list[str]
+
+#--------Endpoints-------------#
+
+@app.get("/health")
+async def health():
+    return {'status': 'ok'}
+
+@app.post("/chat", response_model=ChatResponse)
+async def chat(req: ChatRequest):
+    if not req.user_id or not req.message.strip():
+        raise HTTPException(status_code=400, detail="user_id and message are required")
+    
+
+    memories = await recall_memories(user_id=req.user_id, query=req.message)
+
+    reply, fragments = await get_agent_response(
+        user_message=req.message,
+        memories=memories,
+        conversation_history=req.history
+    )
+
+    if fragments:
+        await store_memory(user_id=req.user_id, fragment=fragments)
+
+    return ChatResponse(reply=reply, new_memory=fragments)
+
+@app.get("/memories/{user_id}", response_model=MemoriesResponse)
+async def get_memories(user_id: str):
+    """
+        returns all stored memory for a user
+    """
+
+    if not user_id: 
+        raise HTTPException(status_code=400, detail="user_id not found and is required")
+    
+    memories = await get_all_memories(user_id=user_id)
+    return MemoriesResponse(memories=memories)
     
