@@ -69,7 +69,7 @@ async def get_agent_response(
 
         reply_text, fragment = _parse_response(full_text)
         
-        return reply_text, fragment
+    return reply_text, fragment
     
 def _parse_response(full_text: str) -> tuple[str, str | None]:
     """

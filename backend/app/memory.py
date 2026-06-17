@@ -22,7 +22,7 @@ async def recall_memories(user_id: str, query: str, top_k: int=5) -> list[str]:
 
     client = get_memwal(user_id)
     try:
-        result = await client.recall(RecallParams(query=query, top_k=top_k))
+        result = await client.recall(RecallParams(query=query, limit=top_k))
         return [m.text for m in result.results]
     finally:
         await client.close()
@@ -49,7 +49,7 @@ async def get_all_memories(user_id: str) -> list[str]:
     try:
         result = await client.recall(RecallParams(
             query="predictions and opinions for the 2026 fifa world cup.",
-            top_k=20
+            limit=20
         ))
         return[m.text for m in result.results]
     finally:
