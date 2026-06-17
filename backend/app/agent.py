@@ -57,7 +57,7 @@ async def get_agent_response(
     messages = conversation_history + [{"role": "user", "content": user_message}]
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-6",
         max_tokens=1024,
         system=system,
         messages=messages,
