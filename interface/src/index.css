@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'tailwindcss';
+
+/* ChatGPT-style dark design tokens. Exposed as Tailwind colors,
+   so we can write e.g. bg-chat-bg, bg-sidebar, text-muted. */
+@theme {
+  --color-chat-bg: #ffffff;
+  --color-sidebar: #f9f9f9;
+  --color-composer: #ffffff;
+  --color-elevated: #f4f4f4;
+  --color-hover: #ececec;
+  --color-line: rgba(0, 0, 0, 0.1);
+  --color-ink: #0d0d0d;
+  --color-muted: #5d5d5d;
+  --color-faint: #8f8f8f;
+  --color-brand: #19c37d;
+
+  --font-sans: 'Segoe UI', system-ui, Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', Consolas, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-chat-bg);
+  color: var(--color-ink);
+  font-family: "Elms Sans", var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Slim, ChatGPT-like scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Minimal highlight.js token theme (rehype-highlight emits .hljs-* classes) */
+.hljs {
+  color: #e6e6e6;
+}
+.hljs-comment,
+.hljs-quote {
+  color: #7d8590;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-literal {
+  color: #ff7b72;
+}
+.hljs-string,
+.hljs-attr,
+.hljs-template-string {
+  color: #a5d6ff;
+}
+.hljs-number,
+.hljs-symbol {
+  color: #79c0ff;
+}
+.hljs-title,
+.hljs-function .hljs-title,
+.hljs-section {
+  color: #d2a8ff;
+}
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #ffa657;
+}
+.hljs-variable,
+.hljs-name {
+  color: #ffa657;
+}
