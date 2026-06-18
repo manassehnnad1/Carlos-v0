@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from 'motion/react'
 
 export default function App() {
   const [username, setUsername] = useState(() => localStorage.getItem('carlos_username'))
-  const { messages, isStreaming, sendMessage, newChat } = useChat()
+  const { messages, isStreaming, sendMessage, newChat, memories, newMemory } = useChat(username)
   const [sidebarOpen, setSidebarOpen] = useState(
     () => typeof window !== 'undefined' && window.innerWidth >= 768,
   )
@@ -45,6 +45,8 @@ export default function App() {
             onToggle={() => setSidebarOpen((o) => !o)}
             onNewChat={handleNewChat}
             username={username}
+            memories={memories}
+            newMemory={newMemory}
           />
 
           <div className="flex min-w-0 flex-1 flex-col">

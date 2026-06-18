@@ -1,23 +1,6 @@
-import { PanelLeft, PenSquare, Search } from 'lucide-react'
-
-/*
- * Left navigation.
- *
- * - Desktop (>= md): statically docked and collapsible to a narrow RAIL. When
- *   collapsed the panel doesn't disappear — its width shrinks so only the icons
- *   (toggle, new chat, search, account) remain visible, like real ChatGPT.
- * - Mobile (< md): an overlay drawer that slides fully off-screen when closed
- *   and in over a dimmed backdrop when open.
- *
- * The sidebar toggle lives inside the sidebar (top), shown in both the expanded
- * and rail states. The chat-history list is an intentional placeholder for now.
- */
-export default function Sidebar({ isOpen, onClose, onToggle, onNewChat, username }) {
-  // "Rail" styling applies whenever the sidebar is collapsed. On mobile the
-  // collapsed panel is off-screen anyway, so this only visibly matters on desktop.
+export default function Sidebar({ isOpen, onClose, onToggle, onNewChat, username, memories = [], newMemory }) {
   const collapsed = !isOpen
 
-  // Shared row styles; icons stay put, labels appear only when expanded.
   const row =
     'flex w-full items-center gap-3 rounded-lg py-2 text-sm text-ink transition-colors hover:bg-hover'
   const rowPad = collapsed ? 'justify-center px-2' : 'px-3'
@@ -25,7 +8,7 @@ export default function Sidebar({ isOpen, onClose, onToggle, onNewChat, username
 
   return (
     <>
-      {/* Backdrop — mobile only, when the drawer is open */}
+      {/* Backdrop — mobile only */}
       {isOpen && (
         <div
           onClick={onClose}
@@ -40,24 +23,39 @@ export default function Sidebar({ isOpen, onClose, onToggle, onNewChat, username
         }`}
       >
         <div className="flex h-full flex-col">
-          {/* Top actions (toggle lives here, like real ChatGPT) */}
+
+          {/* Top — toggle */}
           <div className="flex flex-col gap-1 p-2">
             <button
               type="button"
               onClick={onToggle}
               aria-label="Toggle sidebar"
-              className={`${row} ${rowPad} cursor-pointer`} 
+              className={`${row} ${rowPad} cursor-pointer`}
             >
               <img src="./grid.png" alt="" className="shrink-0 h-5" />
             </button>
-            
-            
           </div>
 
-          {/* History placeholder (empty for now; hidden in the rail) */}
+          {/* Memory list */}
           <div className="flex-1 overflow-y-auto px-3">
             {!collapsed && (
-              <p className="px-1 py-2 text-xs text-faint" style={{ fontFamily: 'Elms Sans' }}>No memory yet</p>
+              <>
+                {memories.length === 0 ? (
+                  <p className="px-1 py-2 text-xs text-faint" style={{ fontFamily: 'Elms Sans' }}>
+                    No memory yet
+                  </p>
+                ) : (
+                  <div className="flex flex-col gap-3 py-2">
+                    {memories.map((m, i) => (
+                      <div key={i} className="px-1">
+                        <p className="text-xs text-ink leading-relaxed" style={{ fontFamily: 'Elms Sans' }}>
+                          {m}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </div>
 
@@ -73,6 +71,7 @@ export default function Sidebar({ isOpen, onClose, onToggle, onNewChat, username
               </span>
             </button>
           </div>
+
         </div>
       </aside>
     </>
