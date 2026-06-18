@@ -20,7 +20,7 @@ TEST_USER = "test-user-001"
 
 async def main():
     print("=" * 50)
-    print("HOT TAKE — Backend Test")
+    print("CARLOS V0 — Backend Test")
     print("=" * 50)
 
     # 1. Check what memories exist for test user (should be empty first run)
