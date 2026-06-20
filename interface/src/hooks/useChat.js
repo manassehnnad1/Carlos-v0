@@ -15,7 +15,6 @@ export function useChat(username) {
 
   useEffect(() => () => clearInterval(timerRef.current), [])
 
-  // Load existing memories on mount / username change
   useEffect(() => {
     if (!username) return
     fetch(`${API_BASE}/memories/${username}`)
@@ -27,7 +26,6 @@ export function useChat(username) {
   const streamIn = useCallback((assistantId, fullText) => {
     const tokens = fullText.match(/\s+|\S+/g) ?? [fullText]
     let i = 0
-    setIsStreaming(true)
     timerRef.current = setInterval(() => {
       i += 1
       const partial = tokens.slice(0, i).join('')
@@ -47,8 +45,8 @@ export function useChat(username) {
       if ((!trimmed && attachments.length === 0) || isStreaming) return
 
       const assistantId = nextId()
+      setIsStreaming(true)
 
-      // Append user message + empty assistant placeholder immediately
       setMessages((prev) => [
         ...prev,
         { id: nextId(), role: 'user', content: trimmed, attachments },
@@ -69,17 +67,14 @@ export function useChat(username) {
         const data = await res.json()
         const reply = data.reply ?? 'Something went wrong.'
 
-        // Update history ref for next turn
         historyRef.current = [
           ...historyRef.current,
           { role: 'user', content: trimmed },
           { role: 'assistant', content: reply },
         ]
 
-        // Stream the reply in
         streamIn(assistantId, reply)
 
-        // Surface new memory if one was stored
         if (data.new_memory) {
           setNewMemory(data.new_memory)
           setMemories((prev) => [data.new_memory, ...prev])

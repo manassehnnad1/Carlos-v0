@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion } from 'motion/react'
 
 export default function UsernameGate({ onEnter }) {
   const handleSubmit = (e) => {
@@ -15,9 +14,10 @@ export default function UsernameGate({ onEnter }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.35, ease: 'easeInOut' }}
-      className="flex h-full items-center justify-center px-6"
+      className="flex h-full flex-col items-center justify-center px-6 overflow-hidden relative"
     >
-      <div className="flex flex-col gap-6 w-full max-w-md">
+      {/* Form — centered */}
+      <div className="flex flex-col gap-6 w-full max-w-md z-10">
         <div className="flex flex-col gap-1">
           <p className="text-xl text-neutral-900">Hola, im Carlos.</p>
           <p className="text-xl text-neutral-400">enter a username to continue</p>
@@ -33,11 +33,30 @@ export default function UsernameGate({ onEnter }) {
           />
           <button
             type="submit"
-            className="bg-black text-white  cursor-pointer rounded-half px-4 py-3 text-lg"
+            className="bg-black text-white cursor-pointer rounded-half px-4 py-3 text-lg"
           >
             Go
           </button>
         </form>
+      </div>
+
+      {/* Bottom images — partially cut off */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-end justify-center gap-0">
+        <img
+          src="./img.png"
+          alt="carlos"
+          className="h-64 w-auto object-contain grayscale translate-y-16"
+        />
+        <img
+          src="./img1.png"
+          alt="memwal"
+          className="h-26 w-auto object-contain grayscale translate-y-3"
+        />
+        <img
+          src="./wc1.png"
+          alt="memwal"
+          className="h-46 w-auto object-contain grayscale translate-y-6"
+        />
       </div>
     </motion.div>
   )

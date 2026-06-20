@@ -41,14 +41,14 @@ export default function Sidebar({ isOpen, onClose, onToggle, onNewChat, username
             {!collapsed && (
               <>
                 {memories.length === 0 ? (
-                  <p className="px-1 py-2 text-xs text-faint" style={{ fontFamily: 'Elms Sans' }}>
+                  <p className="px-1 py-2 text-xs text-faint">
                     No memory yet
                   </p>
                 ) : (
                   <div className="flex flex-col gap-3 py-2">
                     {memories.map((m, i) => (
                       <div key={i} className="px-1">
-                        <p className="text-xs text-ink leading-relaxed" style={{ fontFamily: 'Elms Sans' }}>
+                        <p className="text-xs text-ink leading-relaxed" >
                           {m}
                         </p>
                       </div>
@@ -65,8 +65,8 @@ export default function Sidebar({ isOpen, onClose, onToggle, onNewChat, username
               type="button"
               className={`${row} ${collapsed ? 'justify-center px-2' : 'px-2'}`}
             >
-              <img src="./user.png" alt="" className="shrink-0 h-3" />
-              <span className={labelHidden} style={{ fontFamily: 'Elms Sans' }}>
+              <img src="./use.png" alt="" className="shrink-0 h-3" />
+              <span className={labelHidden}  >
                 {username}
               </span>
             </button>

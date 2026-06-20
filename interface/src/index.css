@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Geist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
 
 /* ChatGPT-style dark design tokens. Exposed as Tailwind colors,
@@ -29,7 +29,7 @@ body {
   margin: 0;
   background: var(--color-chat-bg);
   color: var(--color-ink);
-  font-family: "Elms Sans", var(--font-sans);
+  font-family: "DM Sans", var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

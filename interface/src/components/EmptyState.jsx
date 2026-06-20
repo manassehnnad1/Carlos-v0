@@ -11,11 +11,11 @@ export default function EmptyState({ onStart }) {
         />
 
         {/* Text */}
-        <div className="flex flex-col gap-2 text-center md:text-left">
-          <p className="text-xl md:text-2xl text-neutral-900" style={{ fontFamily: 'Elms Sans' }}>
-            <span className="font-bold">hola, im Carlos!</span>
+        <div className="flex flex-col gap-2 text-center md:text-left" style={{ fontFamily: 'Bricolage Grotesque' }}>
+          <p className="text-xl md:text-2xl text-neutral-900" >
+            <span className="font-semibold">hola, i'm Carlos!</span>
           </p>
-          <p className="text-lg md:text-2xl text-neutral-900" style={{ fontFamily: 'Elms Sans' }}>
+          <p className="text-lg md:text-2xl text-neutral-900" >
             Got any world cup opinions?<br />drop 'em, lets chat.
           </p>
         </div>

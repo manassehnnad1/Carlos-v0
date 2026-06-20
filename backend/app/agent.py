@@ -1,5 +1,7 @@
 import os
 import anthropic
+from app.fixtures import get_match_context
+
 
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
@@ -50,6 +52,11 @@ async def get_agent_response(
 ) -> tuple[str, str | None]:
 
     system = SYSTEM_PROMPT
+
+    fixtures = await get_match_context()
+    if fixtures:
+        system += f"\n\n{fixtures}"
+
     if memories:
         memory_context = "\n".join(f"- {m}" for m in memories)
         system += f"\n\nWhat you already know about this user:\n{memory_context}"
@@ -67,7 +74,6 @@ async def get_agent_response(
     reply_text, fragment = _parse_response(full_text)
 
     return reply_text, fragment
-
 
 def _parse_response(full_text: str) -> tuple[str, str | None]:
     import json

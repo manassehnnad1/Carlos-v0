@@ -44,18 +44,22 @@ export default function Message({ role, content, attachments = [], isStreaming }
       </div>
       <div className={`min-w-0 flex-1 ${PROSE}`}>
         {content ? (
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight]}
-            components={MARKDOWN_COMPONENTS}
-          >
-            {content}
-          </ReactMarkdown>
-        ) : (
-          isStreaming && (
-            <span className="inline-block h-4 w-2 animate-pulse rounded-sm bg-ink align-middle" />
-          )
-        )}
+  <ReactMarkdown
+    remarkPlugins={[remarkGfm]}
+    rehypePlugins={[rehypeHighlight]}
+    components={MARKDOWN_COMPONENTS}
+  >
+    {content}
+  </ReactMarkdown>
+) : (
+  isStreaming && (
+    <div className="flex items-center gap-1 py-1">
+      <span className="w-2 h-2 bg-neutral-200 rounded-full animate-bounce [animation-delay:0ms]" />
+      <span className="w-2 h-2 bg-neutral-200 rounded-full animate-bounce [animation-delay:150ms]" />
+      <span className="w-2 h-2 bg-neutral-200 rounded-full animate-bounce [animation-delay:300ms]" />
+    </div>
+  )
+)}
       </div>
     </div>
   )

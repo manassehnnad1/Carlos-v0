@@ -111,7 +111,7 @@ export default function Composer({ onSend, disabled }) {
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ask anything"
-              className="max-h-50 flex-1 resize-none bg-transparent py-2 text-ink placeholder:text-faint focus:outline-none" style={{ fontFamily: 'Elms Sans' }}
+              className="max-h-50 flex-1 resize-none bg-transparent py-2 text-ink placeholder:text-faint focus:outline-none"
             />
 
             <button
@@ -119,7 +119,7 @@ export default function Composer({ onSend, disabled }) {
               onClick={submit}
               disabled={!canSend}
               aria-label="Send message"
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-chat-bg transition-opacity disabled:opacity-30"
+              className="flex h-9 w-9 shrink-0 items-center justify-center cursor-pointer rounded-full bg-ink text-chat-bg transition-opacity disabled:opacity-30"
             >
               <ArrowUp size={20} />
             </button>
